@@ -1,0 +1,35 @@
+action_id,split,n_clips,has_replay,severity_raw,Severity,Offence,Action class,Bodypart,Contact,handball,handball_offence,trytoplay,touchball,upper_body_part,is_dive
+6,train,0,False,,Unknown,Offence,Dive,Under body,Without contact,Unknown,Unknown,Unknown,Unknown,Unknown,True
+247,train,0,False,,Unknown,Offence,Dive,,Without contact,Unknown,Unknown,Unknown,Unknown,Unknown,True
+764,train,0,False,,Unknown,Offence,Dive,Under body,Without contact,Unknown,Unknown,Unknown,Unknown,Unknown,True
+852,train,0,False,,Unknown,Offence,Dive,Under body,Without contact,Unknown,Unknown,Unknown,Unknown,Unknown,True
+922,train,0,False,,Unknown,Offence,Dive,Under body,Without contact,Unknown,Unknown,Unknown,Unknown,Unknown,True
+970,train,0,False,,Unknown,Offence,Dive,Under body,Without contact,Unknown,Unknown,Unknown,Unknown,Unknown,True
+973,train,0,False,,Unknown,Offence,Dive,,Without contact,Unknown,Unknown,Unknown,Unknown,Unknown,True
+998,train,0,False,,Unknown,Offence,Dive,,Without contact,Unknown,Unknown,Unknown,Unknown,Unknown,True
+1001,train,0,False,,Unknown,Offence,Dive,Under body,With contact,Unknown,Unknown,Unknown,Unknown,Unknown,True
+1129,train,0,False,,Unknown,Offence,Dive,Under body,Without contact,Unknown,Unknown,Unknown,Unknown,Unknown,True
+1135,train,0,False,,Unknown,Offence,Dive,Under body,Without contact,Unknown,Unknown,Unknown,Unknown,Unknown,True
+1323,train,0,False,,Unknown,Offence,Dive,Under body,Without contact,Unknown,Unknown,Unknown,Unknown,Unknown,True
+1350,train,0,False,,Unknown,Offence,Dive,Under body,Without contact,Unknown,Unknown,Unknown,Unknown,Unknown,True
+1407,train,0,False,,Unknown,Offence,Dive,Under body,Without contact,Unknown,Unknown,Unknown,Unknown,Unknown,True
+1761,train,0,False,,Unknown,Offence,Dive,,Without contact,Unknown,Unknown,Unknown,Unknown,Unknown,True
+1779,train,0,False,,Unknown,Offence,Dive,Under body,Without contact,Unknown,Unknown,Unknown,Unknown,Unknown,True
+1790,train,0,False,,Unknown,Offence,Dive,Under body,With contact,Unknown,Unknown,Unknown,Unknown,Unknown,True
+2065,train,0,False,,Unknown,Offence,Dive,Under body,Without contact,Unknown,Unknown,Unknown,Unknown,Unknown,True
+2080,train,0,False,,Unknown,Offence,Dive,Under body,Without contact,Unknown,Unknown,Unknown,Unknown,Unknown,True
+2095,train,0,False,,Unknown,Offence,Dive,Under body,Without contact,Unknown,Unknown,Unknown,Unknown,Unknown,True
+2146,train,0,False,,Unknown,Offence,Dive,Under body,Without contact,Unknown,Unknown,Unknown,Unknown,Unknown,True
+2337,train,0,False,,Unknown,Offence,Dive,Under body,Without contact,Unknown,Unknown,Unknown,Unknown,Unknown,True
+2472,train,0,False,,Unknown,Offence,Dive,Under body,Without contact,Unknown,Unknown,Unknown,Unknown,Unknown,True
+2507,train,0,False,,Unknown,Offence,Dive,Under body,Without contact,Unknown,Unknown,Unknown,Unknown,Unknown,True
+2521,train,0,False,,Unknown,Offence,Dive,,Without contact,Unknown,Unknown,Unknown,Unknown,Unknown,True
+2783,train,0,False,2.0,No card/Yellow card,Offence,Dive,Under body,Without contact,Unknown,Unknown,Unknown,Unknown,Unknown,True
+2878,train,0,False,,Unknown,Offence,Dive,Under body,Without contact,Unknown,Unknown,Unknown,Unknown,Unknown,True
+2909,train,0,False,,Unknown,Offence,Dive,Under body,Without contact,Unknown,Unknown,Unknown,Unknown,Unknown,True
+221,valid,0,False,,Unknown,Offence,Dive,Under body,With contact,Unknown,Unknown,Unknown,Unknown,Unknown,True
+21,test,0,False,1.0,No card,Offence,Dive,Under body,Without contact,Unknown,Unknown,Unknown,Unknown,Unknown,True
+59,test,0,False,,Unknown,Offence,Dive,,Without contact,Unknown,Unknown,Unknown,Unknown,Unknown,True
+110,test,0,False,,Unknown,Offence,Dive,Under body,Without contact,Unknown,Unknown,Unknown,Unknown,Unknown,True
+191,test,0,False,,Unknown,Offence,Dive,Upper body,With contact,Unknown,Unknown,Unknown,Unknown,Unknown,True
+238,test,0,False,,Unknown,Offence,Dive,Under body,Without contact,Unknown,Unknown,Unknown,Unknown,Unknown,True

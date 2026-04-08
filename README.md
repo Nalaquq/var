@@ -24,10 +24,13 @@ full_project/
 │   │   distribution, contact rates, severity, and class weights.
 │   │   Run this first to understand the data before training anything.
 │   │
-│   └── 02_three_baselines.ipynb
-│       Phase 1–3 in one notebook: all three model architectures
-│       side-by-side on identical data. Runs in Colab (T4 GPU).
-│       DEBUG_MODE=True by default (~10 min); set False for full run.
+│   ├── 02_three_baselines.ipynb
+│   │   Phase 1–3 in one notebook: all three model architectures
+│   │   side-by-side on identical data. Runs in Colab (T4 GPU).
+│   │   DEBUG_MODE=True by default (~10 min); set False for full run.
+│   │
+│   └── outputs/                       ← CSV outputs from Colab notebooks
+│       Downloaded after each notebook run. See docs/07-google-colab.md.
 │
 └── local_training/                    ← run these locally in WSL + VS Code
     ├── README.md                      local-specific setup instructions
@@ -53,8 +56,9 @@ If you're new to Python, WSL, VS Code, Git, or CUDA, start here. These step-by-s
 4. [Git and GitHub](docs/04-git-github.md) — Version control fundamentals
 5. [NVIDIA Drivers and CUDA](docs/05-cuda-gpu-setup.md) — GPU setup for deep learning
 6. [Running the MVFoul Project](docs/06-running-the-project.md) — End-to-end walkthrough of training
+7. [Using Google Colab](docs/07-google-colab.md) — Uploading/downloading files, running notebooks in Colab
 
-Complete them in order — each one builds on the previous.
+Complete them in order — each one builds on the previous (Step 7 can be done anytime).
 
 ---
 

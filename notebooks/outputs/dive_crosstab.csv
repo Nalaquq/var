@@ -1,0 +1,19 @@
+feature,value,n,n_dive,dive_rate
+Offence,,1,0,0.0
+Offence,Between,126,0,0.0
+Offence,No offence,380,0,0.0
+Offence,Offence,3121,34,1.09
+Severity,No card,1768,1,0.06
+Severity,No card/Yellow card,496,1,0.2
+Severity,Red card,35,0,0.0
+Severity,Unknown,414,32,7.73
+Severity,Yellow card,859,0,0.0
+Severity,Yellow card/Red card,56,0,0.0
+Bodypart,,45,6,13.33
+Bodypart,Under body,2278,27,1.19
+Bodypart,Upper body,1305,1,0.08
+Contact,With contact,3528,4,0.11
+Contact,Without contact,100,30,30.0
+trytoplay,Unknown,3628,34,0.94
+touchball,Unknown,3628,34,0.94
+handball,Unknown,3628,34,0.94
