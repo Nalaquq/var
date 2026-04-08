@@ -43,6 +43,21 @@ full_project/
 
 ---
 
+## Getting started (new to this?)
+
+If you're new to Python, WSL, VS Code, Git, or CUDA, start here. These step-by-step tutorials walk you through everything from scratch:
+
+1. [Installing WSL2](docs/01-wsl-setup.md) — Get a Linux environment running on Windows
+2. [Setting Up VS Code](docs/02-vscode-setup.md) — Install and connect VS Code to WSL
+3. [Python and Virtual Environments](docs/03-python-basics.md) — Python basics, pip, and venvs
+4. [Git and GitHub](docs/04-git-github.md) — Version control fundamentals
+5. [NVIDIA Drivers and CUDA](docs/05-cuda-gpu-setup.md) — GPU setup for deep learning
+6. [Running the MVFoul Project](docs/06-running-the-project.md) — End-to-end walkthrough of training
+
+Complete them in order — each one builds on the previous.
+
+---
+
 ## Recommended workflow
 
 ### Step 1 — Understand the data (Colab, ~30 min)
