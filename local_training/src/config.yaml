@@ -1,0 +1,76 @@
+# ─────────────────────────────────────────────────────────────────────────────
+# MVFoul experiment configuration
+# Edit this file to change hyperparameters; do not touch train.py.
+# ─────────────────────────────────────────────────────────────────────────────
+
+# ── Paths ─────────────────────────────────────────────────────────────────────
+data:
+  root:        "/data/mvfoul"          # change to wherever you put the dataset
+  splits:
+    train:     "train"                 # subfolder names inside root/mvfouls/
+    valid:     "valid"
+    test:      "test"
+  cache_dir:   "/data/mvfoul/cache"    # pose + graph features cached here
+  results_dir: "results"               # relative to project root
+  ckpt_dir:    "checkpoints"           # relative to project root
+
+# ── Classes (do not change — fixed by SoccerNet evaluation code) ──────────────
+classes:
+  - Tackling
+  - Standing tackling
+  - High leg
+  - Holding
+  - Pushing
+  - Elbowing
+  - Challenge
+  - Dive                               # index 7 — our primary target
+
+# ── Training — shared across all approaches ───────────────────────────────────
+training:
+  seed:        42
+  debug_mode:  false                   # true = 60-action subset, fast validation
+  debug_n:     60
+  num_workers: 2                       # WSL2: keep low to avoid DataLoader hangs
+
+# ── Approach A — MViT video baseline ─────────────────────────────────────────
+# RTX A4000 16 GB: batch 8 fits comfortably during fine-tune phase
+approach_A:
+  n_frames:    16
+  frame_size:  224
+  batch_size:  8                       # 16 GB headroom; drop to 4 if OOM
+  phase1:
+    n_epochs:  5
+    lr:        3.0e-4
+    patience:  3
+  phase2:
+    n_epochs:  20
+    lr:        5.0e-5
+    patience:  7
+  weight_decay: 1.0e-4
+
+# ── Approach B — BiLSTM pose baseline ────────────────────────────────────────
+# Tiny model — batch 128 fits easily in 16 GB, trains fast
+approach_B:
+  n_frames:    16
+  batch_size:  128
+  hidden_dim:  256
+  n_layers:    2
+  dropout:     0.3
+  n_epochs:    50
+  lr:          3.0e-4
+  patience:    10
+  weight_decay: 1.0e-4
+
+# ── Approach C — ST-GCN (novel contribution) ─────────────────────────────────
+# Batch 128 fine on 16 GB; more data per step helps with Dive class imbalance
+approach_C:
+  n_frames:    16
+  batch_size:  128
+  channels:    [64, 128, 256]
+  t_kernel:    9
+  dropout:     0.2
+  n_epochs:    60
+  lr:          1.0e-3
+  patience:    12
+  weight_decay: 1.0e-4
+  node_features: 4
