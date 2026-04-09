@@ -18,16 +18,13 @@ full_project/
 │       scoped project plan with 8-week timeline and risk table.
 │
 ├── notebooks/                         ← run these in Google Colab
-│   ├── 01_dataset_statistics.ipynb
-│   │   Phase 0: download SoccerNet-MVFoul annotations, parse JSON,
-│   │   generate summary statistics and 7 plots focused on Dive class
-│   │   distribution, contact rates, severity, and class weights.
-│   │   Run this first to understand the data before training anything.
+│   ├── 00_unified_pipeline.ipynb      ★ START HERE
+│   │   All-in-one notebook: dataset statistics, plots, and all three
+│   │   model architectures in a single file. No file transfers needed.
+│   │   DEBUG_MODE=True by default (~15 min); set False for full run.
 │   │
-│   ├── 02_three_baselines.ipynb
-│   │   Phase 1–3 in one notebook: all three model architectures
-│   │   side-by-side on identical data. Runs in Colab (T4 GPU).
-│   │   DEBUG_MODE=True by default (~10 min); set False for full run.
+│   ├── 01_dataset_statistics.ipynb    (original, kept for reference)
+│   ├── 02_three_baselines.ipynb       (original, kept for reference)
 │   │
 │   └── outputs/                       ← CSV outputs from Colab notebooks
 │       Downloaded after each notebook run. See docs/07-google-colab.md.
@@ -64,18 +61,13 @@ Complete them in order — each one builds on the previous (Step 7 can be done a
 
 ## Recommended workflow
 
-### Step 1 — Understand the data (Colab, ~30 min)
-Open `notebooks/01_dataset_statistics.ipynb` in Google Colab.
-Run all cells. Key outputs:
-- Dive class is ~0.9% of actions (severe imbalance — weighted loss is essential)
-- Contact rate for dives vs. genuine fouls (tests the core hypothesis)
-- Class weights to paste into training config
+### Step 1 — Run the unified notebook (Colab, ~15 min)
+Open `notebooks/00_unified_pipeline.ipynb` in Google Colab (see [docs/07-google-colab.md](docs/07-google-colab.md) for step-by-step instructions). Make sure to select a **T4 GPU** runtime.
 
-### Step 2 — Validate the pipeline (Colab or local, ~25 min)
-Open `notebooks/02_three_baselines.ipynb`. With `DEBUG_MODE=True`
-(default), all three architectures run end-to-end on 60 actions.
-Confirms data loading, model forward passes, and metric computation
-before committing to a full training run.
+Run all cells. With `DEBUG_MODE=True` (default), everything runs end-to-end in ~15 minutes. You will get:
+- Dataset statistics and 7 plots (class imbalance, contact rates, severity, etc.)
+- All three model architectures trained and compared side-by-side
+- CSV exports and training results to download
 
 ### Step 3 — Full training run (local WSL, ~11 hrs on RTX A4000)
 ```bash

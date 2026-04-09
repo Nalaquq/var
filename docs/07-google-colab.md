@@ -1,138 +1,154 @@
 # Step 7: Using Google Colab
 
-This guide explains how to use Google Colab to run the project notebooks, including how to upload and download files.
+This guide walks you through running the project notebooks in Google Colab. No installation on your computer is needed — everything runs in the cloud.
 
 ---
 
 ## What is Google Colab?
 
-Google Colab is a free online environment that lets you run Python notebooks in the cloud. It provides a GPU so you can train models without needing your own graphics card. Think of it as a temporary computer in the cloud that comes pre-installed with Python and machine learning tools.
+Google Colab is a free website that lets you run Python code in the cloud. It gives you a temporary computer with a GPU (graphics card) so you can train models without needing your own. Think of it like Google Docs, but for code.
+
+**Important things to know:**
+- Your files are **temporary**. When you close the tab or the session times out (~90 min idle, ~12 hours total), everything is deleted.
+- Always **download your results** before closing Colab.
 
 ---
 
-## Opening a notebook in Colab
+## How to run the unified notebook
+
+The project has one main notebook that does everything: `notebooks/00_unified_pipeline.ipynb`. It downloads the data, shows you statistics, and trains all three models — all in one place.
+
+### Step 1: Open the notebook in Colab
 
 1. Go to [Google Colab](https://colab.research.google.com/)
 2. Click **File > Open notebook**
-3. Select the **GitHub** tab or the **Upload** tab:
-   - **GitHub:** Paste the repository URL and select the notebook
-   - **Upload:** Download the `.ipynb` file from the repo and upload it manually
+3. Choose one of these options:
+   - **Upload tab:** Download `00_unified_pipeline.ipynb` from the repo to your computer first, then upload it here
+   - **GitHub tab:** Paste the repository URL and select the notebook
+
+### Step 2: Turn on the GPU
+
+The training parts of the notebook need a GPU. Free Colab gives you one:
+
+1. Click **Runtime > Change runtime type** (in the menu bar at the top)
+2. Under "Hardware accelerator", select **T4 GPU**
+3. Click **Save**
+
+To verify the GPU is working, run this in any code cell:
+```
+!nvidia-smi
+```
+You should see a table showing the GPU name (like "Tesla T4"). If it says "No GPU", repeat the steps above.
+
+### Step 3: Run the notebook
+
+You have two options:
+
+- **Run everything at once:** Click **Runtime > Run all**. This takes ~15 minutes in debug mode.
+- **Run one cell at a time:** Click each cell and press **Shift+Enter** (or click the play button on the left side of the cell). Go from top to bottom — don't skip cells.
+
+The notebook has 9 parts:
+1. Install packages
+2. Download data
+3. Dataset statistics and plots
+4. Prepare data for training
+5. Train Approach A (MViT video model)
+6. Train Approach B (BiLSTM pose model)
+7. Train Approach C (ST-GCN skeleton model)
+8. Compare all three approaches
+9. Download your results
+
+### Step 4: Download your results
+
+When the notebook finishes, run the last cell (Part 9). It will automatically download the CSV files and training results to your computer's Downloads folder.
+
+You can also download files manually:
+1. Click the **folder icon** in the left sidebar to open the file browser
+2. Navigate to the file you want
+3. Click the **three dots** next to the file name
+4. Select **Download**
+
+**Save these files into `notebooks/outputs/` in your local copy of the repo.**
 
 ---
 
-## Uploading files to Colab
+## Uploading and downloading files (general)
 
-Colab runs on a temporary virtual machine — it does **not** have access to files on your computer. If a notebook needs files (like CSVs from a previous step), you must upload them.
+### Uploading files to Colab
 
-### Method 1: Upload via the file browser (easiest)
+If you ever need to upload a file (for example, a CSV or a config file):
 
-1. In Colab, click the **folder icon** in the left sidebar to open the file browser
-2. Click the **upload icon** (page with an up arrow) at the top of the file browser
-3. Select the files from your computer
-4. They will appear in `/content/` — this is Colab's working directory
+1. Click the **folder icon** in the left sidebar
+2. Click the **upload icon** (page with an up arrow) at the top
+3. Select files from your computer
+4. They appear in `/content/` — Colab's working directory
 
-> **Important:** Uploaded files are **temporary**. They are deleted when your Colab session ends (after ~12 hours of inactivity, or when you disconnect). Always download any outputs you need before closing Colab.
-
-### Method 2: Upload with Python code
-
-You can also upload files using a code cell. Add a cell at the top of the notebook and run:
-
+Or use Python code in a cell:
 ```python
 from google.colab import files
 uploaded = files.upload()
 ```
 
-A file picker dialog will appear. Select your files and they will be uploaded to the current working directory (`/content/`).
+### Downloading files from Colab
 
-### Method 3: Mount Google Drive (best for large or reusable files)
-
-If you want your files to persist between sessions, use Google Drive:
-
-```python
-from google.colab import drive
-drive.mount('/content/drive')
-```
-
-This will ask you to sign in to your Google account. Once mounted, your Drive files are at `/content/drive/MyDrive/`. You can create a project folder there:
-
-```python
-import shutil
-# Copy a file from Drive to the working directory
-shutil.copy('/content/drive/MyDrive/MVFoul/class_weights.csv', '/content/')
-```
-
----
-
-## Downloading files from Colab
-
-When a notebook produces output files (CSVs, plots, model checkpoints), you need to download them before your session ends.
-
-### Method 1: Download via the file browser
-
-1. Click the **folder icon** in the left sidebar
-2. Find the file you want
-3. Click the **three dots** next to the file name
-4. Select **Download**
-
-### Method 2: Download with Python code
-
-Add a code cell and run:
-
+To download a file with Python code:
 ```python
 from google.colab import files
 files.download('filename.csv')
 ```
 
-Your browser will download the file to your local Downloads folder.
+### Using Google Drive for persistent storage
 
-### Method 3: Save to Google Drive
+If you want files to survive between sessions, mount Google Drive:
+```python
+from google.colab import drive
+drive.mount('/content/drive')
+```
 
-If you mounted Drive (see above), copy files there:
-
+Then copy files to/from Drive:
 ```python
 import shutil
-shutil.copy('/content/filename.csv', '/content/drive/MyDrive/MVFoul/')
+# Save a result to Drive
+shutil.copy('/content/results/comparison_table.csv', '/content/drive/MyDrive/')
+# Load a file from Drive
+shutil.copy('/content/drive/MyDrive/my_file.csv', '/content/')
 ```
 
 ---
 
-## Uploading CSVs from Phase 0 into Phase 1
+## Troubleshooting
 
-After running `01_dataset_statistics.ipynb`, you will have downloaded CSV files to your computer (stored in `notebooks/outputs/` in the repo). When you open `02_three_baselines.ipynb`, you need to upload these files:
-
-1. Open `02_three_baselines.ipynb` in Colab
-2. Click the **folder icon** in the left sidebar
-3. Click the **upload icon** and select these files from `notebooks/outputs/`:
-   - `class_weights.csv`
-   - `dive_crosstab.csv`
-   - `mvfoul_all_actions.csv`
-   - `mvfoul_dives_only.csv`
-4. Verify they uploaded by running in a code cell:
-   ```python
-   import os
-   os.listdir('/content/')
-   ```
-5. You should see your CSV files listed in the output
-
----
-
-## Tips for working in Colab
-
-- **Save your work:** Colab autosaves to your Google Drive, but you can also do **File > Save a copy in Drive** to be safe
-- **Check your GPU:** Run `!nvidia-smi` in a code cell to confirm a GPU is assigned. If it says "No GPU", go to **Runtime > Change runtime type** and select **T4 GPU**
-- **Session timeouts:** Free Colab sessions disconnect after ~90 minutes of inactivity or ~12 hours total. Download your outputs before you leave
-- **Restart runtime:** If something breaks, go to **Runtime > Restart runtime** to start fresh (your uploaded files will still be there, but any variables in memory are cleared)
-- **RAM limits:** Free Colab gives ~12 GB of RAM. If you get a "session crashed" message, your notebook used too much memory. Try enabling `DEBUG_MODE = True` to use a smaller dataset
+| Problem | Solution |
+|---------|----------|
+| "No GPU" or training is very slow | **Runtime > Change runtime type > T4 GPU** |
+| "Session crashed" or out of memory | Set `DEBUG_MODE = True` in the config cell and restart: **Runtime > Restart runtime** |
+| Session disconnected | Your session timed out. Re-open the notebook, turn on the GPU, and run all cells again. Uploaded files are gone — but the notebook re-downloads the data automatically. |
+| `ModuleNotFoundError` | Run the install cell (Part 1) first. If it still fails, try **Runtime > Restart runtime** then run from the top. |
+| Plots look wrong or variables not found | Make sure you ran cells in order from top to bottom. Don't skip cells. |
 
 ---
 
 ## Quick reference
 
 | Task | How to do it |
-|---|---|
-| Upload files | Folder icon > upload icon, or `files.upload()` |
-| Download files | Folder icon > three dots > Download, or `files.download()` |
+|------|-------------|
+| Open a notebook | File > Open notebook > Upload or GitHub tab |
+| Turn on GPU | Runtime > Change runtime type > T4 GPU |
+| Run all cells | Runtime > Run all |
+| Run one cell | Click the cell, then Shift+Enter |
+| Upload files | Folder icon > upload icon |
+| Download files | Folder icon > three dots > Download |
 | Check GPU | Run `!nvidia-smi` in a cell |
-| Change GPU | Runtime > Change runtime type > T4 GPU |
-| Check working directory | Run `!ls /content/` in a cell |
-| Persistent storage | Mount Google Drive with `drive.mount()` |
+| Restart if stuck | Runtime > Restart runtime |
+| Check what files exist | Run `!ls /content/` in a cell |
+| Persistent storage | Mount Google Drive (see above) |
+
+---
+
+## About the original two-notebook workflow
+
+The repo also contains the original separate notebooks:
+- `01_dataset_statistics.ipynb` — statistics only
+- `02_three_baselines.ipynb` — training only
+
+These are kept for reference but are **not recommended** for new users. The unified notebook (`00_unified_pipeline.ipynb`) combines both into a single file so you don't need to transfer data between them.
